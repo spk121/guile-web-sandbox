@@ -25,6 +25,5 @@ Here's a pretty good article about getting a Flask app into a Dockerfile:
 [How to Dockerize a Flask App](https://www.freecodecamp.org/news/how-to-dockerize-a-flask-app/).
 
 Microsoft talks about getting a Flask App on Azure here:
-[Migrate custom software to Azure App Service using a custom container]
-(https://learn.microsoft.com/en-us/azure/app-service/tutorial-custom-container?tabs=azure-cli&pivots=container-linux)
+[Migrate custom software to Azure App Service using a custom container](https://learn.microsoft.com/en-us/azure/app-service/tutorial-custom-container?tabs=azure-cli&pivots=container-linux)
 
