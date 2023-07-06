@@ -20,3 +20,7 @@ cmd and cmd args.  The only think it is missing is a limit on the number of
 forks.  It uses flask.
 
 So a Dockerfile with Flask and Guile and the sandbox repl.
+
+Here's a pretty good article about getting a Flask app into a Dockerfile:
+[How to Dockerize a Flask App](https://www.freecodecamp.org/news/how-to-dockerize-a-flask-app/).
+
