@@ -1,6 +1,10 @@
 [comment]: <> (    |         |         |         |         |         |          |)
 # guile-web-sandbox
-Containerized web app that provides a browser-based terminal to Guile sandbox.
+
+This is just an idea. I haven't started yet.
+
+Imagine a containerized web app that provides a browser-based terminal to
+Guile sandbox.
 
 Since I've been having fun with the DevOps, I thought it would be cool to make
 something with Guile that I could use to practice CD.
