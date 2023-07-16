@@ -16,11 +16,11 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
     - run: |
-        docker build . -t mycontainer.azurecr.io/myapp:${{ github.sha }}
-        docker push mycontainer.azurecr.io/myapp:${{ github.sha }}     
+        docker build . -t mycontainer.azurecr.io/sandy:${{ github.sha }}
+        docker push mycontainer.azurecr.io/sandy:${{ github.sha }}     
 
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: 'myapp'
+        app-name: 'sandy'
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        images: 'mycontainer.azurecr.io/myapp:${{ github.sha }}'
+        images: 'mycontainer.azurecr.io/sandy:${{ github.sha }}'
