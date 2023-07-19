@@ -146,10 +146,7 @@ More info here https://modwsgi.readthedocs.io/en/master/user-guides/configuratio
 
 There's some info there on limiting number of processes and threads, and something about *daemon mode*
 
-Somehow I also need to do the reverse proxy party. I this the same as the above or different??
-Do I need to do reverse proxy if I'm doing mod_wsgi?
-
-What happens with `DocumentRoot`?
+How do I mis mod_proxy and mod_wsgi?  Mod proxy setup is something like this.
 
 ```
 LoadModule proxy_module modules/mod_proxy.so
@@ -179,3 +176,7 @@ it says
     ```
     
 What does that mean?
+
+There is another version of reverse proxy middleware here
+https://pypi.org/project/flask-reverse-proxy-fix/
+
