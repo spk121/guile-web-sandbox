@@ -77,3 +77,36 @@ add to my-httpd.conf something like this
 </VirtualHost>
 ```
 
+Somehow I also need to do the reverse proxy party. I this the same as the above or different??
+Do I need to do reverse proxy if I'm doing mod_wsgi?
+
+What happens with `DocumentRoot`?
+
+```
+LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_http_module modules/mod_proxy_http.so
+ProxyPass / http://127.0.0.1:8000/
+RequestHeader set X-Forwarded-Proto http
+RequestHeader set X-Forwarded-Prefix /
+```
+
+In the app init, decorate the app with this middlware for proxy stuff
+
+```
+from werkzeug.middleware.proxy_fix import ProxyFix
+# App is behind one proxy that sets the -For and -Host headers.
+app = ProxyFix(app, x_for=1, x_host=1)
+```
+
+it says
+
+    ```
+    X-Forwarded-For sets REMOTE_ADDR.
+    X-Forwarded-Proto sets wsgi.url_scheme.
+    X-Forwarded-Host sets HTTP_HOST, SERVER_NAME, and SERVER_PORT.
+    X-Forwarded-Port sets HTTP_HOST and SERVER_PORT.
+    X-Forwarded-Prefix sets SCRIPT_NAME.
+    The original values of the headers are stored in the WSGI environ as werkzeug.proxy_fix.orig, a dict.
+    ```
+    
+What does that mean?
