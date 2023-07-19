@@ -1,3 +1,3 @@
 import sys
-# sys.path.insert(0, 'C:\\git')
+sys.path.insert(0, '/app/sandy')
 from sandy import app as application
