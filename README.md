@@ -34,3 +34,13 @@ Here's a pretty good article about getting a Flask app into a Dockerfile:
 Microsoft talks about getting a Flask App on Azure here:
 [Migrate custom software to Azure App Service using a custom container](https://learn.microsoft.com/en-us/azure/app-service/tutorial-custom-container?tabs=azure-cli&pivots=container-linux)
 
+## Where we are
+
+So I made a static dockerfile for just Apache.
+
+Need to fix my-httpd.conf.
+
+```
+$ docker build -t my-apache2 .
+$ docker run -dit --name my-running-app -p 8080:80 my-apache2
+```
