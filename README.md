@@ -44,3 +44,11 @@ Need to fix my-httpd.conf.
 $ docker build -t my-apache2 .
 $ docker run -dit --name my-running-app -p 8080:80 my-apache2
 ```
+
+Need to install mod_wsgi in this apache instance
+
+```
+$ pip install mod_wsgi
+```
+
+fix wsgi script
