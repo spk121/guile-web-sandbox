@@ -40,6 +40,8 @@ So I made a static dockerfile for just Apache.
 
 Need to fix my-httpd.conf.
 
+Don't forget `LogLevel info` in the httpd.conf until it works.
+
 ```
 $ docker build -t my-apache2 .
 $ docker run -dit --name my-running-app -p 8080:80 my-apache2
@@ -76,6 +78,73 @@ add to my-httpd.conf something like this
     </Directory>
 </VirtualHost>
 ```
+
+That first slash in WSGIScriptAlias is the URL mount point of the WSGI application.
+The 2nd argument is an absolute path to the wsgi file.
+
+So if you mount the flask app in a subdirectory, it goes like this
+
+```
+<VirtualHost *:80>
+    ServerName www.example.com
+    ServerAlias example.com
+    ServerAdmin webmaster@example.com
+
+    DocumentRoot /usr/local/www/documents
+
+    <Directory /usr/local/www/documents>
+        Require all granted
+    </Directory>
+
+    WSGIScriptAlias /myapp /usr/local/www/wsgi-scripts/myapp.wsgi
+
+    <Directory /usr/local/www/wsgi-scripts>
+        Require all granted
+    </Directory>
+</VirtualHost>
+```
+
+But if you mount it in root, you need to escape all the directories that aren't part of
+the flask app..
+
+```
+<VirtualHost *:80>
+
+    ServerName www.example.com
+    ServerAlias example.com
+    ServerAdmin webmaster@example.com
+
+    DocumentRoot /usr/local/www/documents
+
+    Alias /robots.txt /usr/local/www/documents/robots.txt
+    Alias /favicon.ico /usr/local/www/documents/favicon.ico
+
+    Alias /media/ /usr/local/www/documents/media/
+
+    <Directory /usr/local/www/documents>
+        Require all granted
+    </Directory>
+
+    WSGIScriptAlias / /usr/local/www/wsgi-scripts/myapp.wsgi
+
+    <Directory /usr/local/www/wsgi-scripts>
+        Require all granted
+    </Directory>
+
+</VirtualHost>
+```
+
+For multiple applications, put them in order of precedence
+
+```
+WSGIScriptAlias /wiki /usr/local/wsgi/scripts/mywiki.wsgi
+WSGIScriptAlias /blog /usr/local/wsgi/scripts/myblog.wsgi
+WSGIScriptAlias / /usr/local/wsgi/scripts/myapp.wsgi
+```
+
+More info here https://modwsgi.readthedocs.io/en/master/user-guides/configuration-guidelines.html
+
+There's some info there on limiting number of processes and threads, and something about *daemon mode*
 
 Somehow I also need to do the reverse proxy party. I this the same as the above or different??
 Do I need to do reverse proxy if I'm doing mod_wsgi?
