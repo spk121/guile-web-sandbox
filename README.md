@@ -48,7 +48,32 @@ $ docker run -dit --name my-running-app -p 8080:80 my-apache2
 Need to install mod_wsgi in this apache instance
 
 ```
-$ pip install mod_wsgi
+$  apt-get install libapache2-mod-wsgi-py3
 ```
 
 fix wsgi script
+
+add my my-httpd.conf the output from this 
+
+```
+mod_wsgi-express module-config
+```
+
+add to my-httpd.conf something like this
+
+```
+<VirtualHost *>
+    ServerName example.com
+
+    WSGIDaemonProcess yourapplication user=user1 group=group1 threads=5
+    WSGIScriptAlias / /var/www/yourapplication/yourapplication.wsgi
+
+    <Directory /var/www/yourapplication>
+        WSGIProcessGroup yourapplication
+        WSGIApplicationGroup %{GLOBAL}
+        Order deny,allow
+        Allow from all
+    </Directory>
+</VirtualHost>
+```
+
