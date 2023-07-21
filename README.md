@@ -180,3 +180,8 @@ What does that mean?
 There is another version of reverse proxy middleware here
 https://pypi.org/project/flask-reverse-proxy-fix/
 
+## Docs
+
+https://learn.microsoft.com/en-us/azure/app-service/tutorial-custom-container?tabs=azure-cli&pivots=container-linux
+
+https://learn.microsoft.com/en-us/azure/app-service/app-service-sql-github-actions
