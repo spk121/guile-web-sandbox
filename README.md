@@ -185,3 +185,32 @@ https://pypi.org/project/flask-reverse-proxy-fix/
 https://learn.microsoft.com/en-us/azure/app-service/tutorial-custom-container?tabs=azure-cli&pivots=container-linux
 
 https://learn.microsoft.com/en-us/azure/app-service/app-service-sql-github-actions
+
+Also, Azure's example Dockerfile starts with a container that already has wsgi/flask/nginx.  Is nginx more flask-y than Apache?
+
+```
+
+FROM tiangolo/uwsgi-nginx-flask:python3.6
+
+RUN mkdir /code
+WORKDIR /code
+ADD requirements.txt /code/
+RUN pip install -r requirements.txt --no-cache-dir
+ADD . /code/
+
+# ssh
+ENV SSH_PASSWD "root:Docker!"
+RUN apt-get update \
+        && apt-get install -y --no-install-recommends dialog \
+        && apt-get update \
+	&& apt-get install -y --no-install-recommends openssh-server \
+	&& echo "$SSH_PASSWD" | chpasswd 
+
+COPY sshd_config /etc/ssh/
+COPY init.sh /usr/local/bin/
+	
+RUN chmod u+x /usr/local/bin/init.sh
+EXPOSE 8000 2222
+#CMD ["python", "/code/manage.py", "runserver", "0.0.0.0:8000"]
+ENTRYPOINT ["init.sh"]
+```
