@@ -214,3 +214,6 @@ EXPOSE 8000 2222
 #CMD ["python", "/code/manage.py", "runserver", "0.0.0.0:8000"]
 ENTRYPOINT ["init.sh"]
 ```
+
+But hey, if you look up at the maintainer of that dockerfile, tiangolo, he says that python:3.6 is obsolete.  He has up to 3.11 on his repo.
+He also give an example of how he would use that repo here https://github.com/tiangolo/uwsgi-nginx-flask-docker/tree/master/example-flask-package-python3.8
